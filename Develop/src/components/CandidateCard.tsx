@@ -1,5 +1,5 @@
 import type { Candidate } from '../interfaces/Candidate.interface';
-import { IoAddCircle, IoRemoveCircle } from 'react-icons/io5';
+// import { IoAddCircle, IoRemoveCircle } from 'react-icons/io5';
 
 type CandidateCardProps = {
     currentUser: Candidate;
