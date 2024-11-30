@@ -5,8 +5,10 @@ import CandidateCard from '../components/CandidateCard';
 
 const CandidateSearch = () => {
   const [results, setResults] = useState<Candidate[]>([]);
+  console.log(results);
   const [currentCandidate, setCurrentCandidate] = useState<Candidate>({
     id: null,
+    login: null,
     name: null,
     username: null,
     location: null,
@@ -16,7 +18,7 @@ const CandidateSearch = () => {
     company: null,
   });
 
-  const [currentidx, setCurrentidx] = useState<number>(0);
+  // const [currentidx, _setCurrentidx] = useState<number>(0);
   // const [searchInput, setSearchInput] = useState<string>('');
 
   // const addToSavedCandidates = () => {
@@ -27,45 +29,60 @@ const CandidateSearch = () => {
   // const searchForCandidateByName = async (event: FormEvent, candidate_name: string) => {
   //   event.preventDefault();
   // const searchForCandidateByName = async (event: FormEvent, candidate_name: string) => {
-  const searchForCandidateByName = async (user: string) => {
-    const data: Candidate = await searchGithubUser(user);
-    setCurrentCandidate(data)
+  // const searchForCandidateByName = async (user: string) => {
+  //   const data: Candidate = await searchGithubUser(user);
+  //   setCurrentCandidate(data)
     
-  };
+  // };
   const searchForRandomCandidate = async () => {
     // const results = await searchGithub();
     const data: Candidate[] = await searchGithub();
     setResults(data)
-    await searchForCandidateByName(data[currentidx].username || '')
+    const userResult = await searchGithubUser(data[0].login as string);
+    console.log(userResult)
+
+    const candidate = {
+      id: userResult.id,
+      name: userResult.login,
+      login: userResult.login,
+      username: userResult.login,
+      location: userResult.location,
+      avatar: userResult.avatar_url,
+      email: userResult.email,
+      html_url: userResult.html_url,
+      company: userResult.company,
+    };
+    setCurrentCandidate(candidate)
+    // await searchForCandidateByName(data[currentidx].username || '')
     // return results
   };
 
   console.log('Here is Github data');
-  console.log(searchForRandomCandidate());
+  // console.log(searchForRandomCandidate());
 
-  const makeDecision = async (isSelected:boolean) => {
-    if (isSelected) {
-      let displayCandidates: Candidate[] = []
+  // // const makeDecision = async (isSelected:boolean) => {
+  // //   if (isSelected) {
+  // //     let displayCandidates: Candidate[] = []
 
-      const savedCandidates = localStorage.getItem('savedCandidates')
-      if (typeof savedCandidates === 'string') {
-        displayCandidates = JSON.parse(savedCandidates)
-      }
-      displayCandidates.push(currentCandidate)
-      localStorage.setItem('savedCandidates', JSON.stringify(displayCandidates))
-    }
-    if (currentidx + 1 < results.length) {
-      setCurrentidx(currentidx + 1)
-      await searchForCandidateByName(results[currentidx + 1].username || '')
-    } else {
-      setCurrentidx(0)
-      await searchForCandidateByName()
-    }
-  }
+  //     const savedCandidates = localStorage.getItem('savedCandidates')
+  //     if (typeof savedCandidates === 'string') {
+  //       displayCandidates = JSON.parse(savedCandidates)
+  //     }
+  //     displayCandidates.push(currentCandidate)
+  //     localStorage.setItem('savedCandidates', JSON.stringify(displayCandidates))
+  //   }
+  //   if (currentidx + 1 < results.length) {
+  //     setCurrentidx(currentidx + 1)
+  //     await searchForCandidateByName(results[currentidx + 1].username || '')
+  //   } else {
+  //     setCurrentidx(0)
+  //     await searchForCandidateByName(results[0].username || '')
+  //   }
+  // }
 
   useEffect(() => {
     searchForRandomCandidate()
-    searchForCandidateByName(currentCandidate.username || '')
+    // searchForCandidateByName(currentCandidate.username || '')
   },[])
 
   return (
@@ -76,10 +93,11 @@ const CandidateSearch = () => {
             searchForCandidateByName(event, searchInput)
           }
         > */}
-          <h1>CandidateSearch</h1>
+          <h1>Candidate Search</h1>
           <CandidateCard
             currentCandidate={currentCandidate}
-            makeDecision={makeDecision} />
+            // makeDecision={makeDecision} 
+            />
             {/* // addToSavedCandidates={addToSavedCandidates} */}
         {/* </form> */}
       </section>

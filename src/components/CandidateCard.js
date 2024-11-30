@@ -1,5 +1,0 @@
-import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
-const CandidateCard = ({ currentUser, makeDecision }) => {
-    return (_jsx(_Fragment, { children: currentUser?.name ? (_jsxs("section", { className: 'candidateCard', children: [_jsx("figure", { children: _jsx("img", { src: `${currentUser.avatar}`, alt: `${currentUser.username}` }) }), _jsxs("article", { className: 'details', children: [_jsx("h2", { children: currentUser.name }), _jsxs("p", { children: [_jsx("strong", { children: "Username" }), " ", currentUser.username] }), _jsxs("p", { children: [_jsx("strong", { children: "Location" }), " ", currentUser.location] }), _jsxs("p", { children: [_jsx("strong", { children: "Email" }), " ", currentUser.email] }), _jsx("p", { children: _jsx("strong", { children: currentUser.html_url }) }), _jsxs("p", { children: [_jsx("strong", { children: "Company" }), " ", currentUser.company] })] })] })) : (_jsx("h1", { style: { margin: '16px 0' }, children: "Please select a candidate." })) }));
-};
-export default CandidateCard;

@@ -2,42 +2,43 @@ import type { Candidate } from '../interfaces/Candidate.interface';
 // import { IoAddCircle, IoRemoveCircle } from 'react-icons/io5';
 
 type CandidateCardProps = {
-    currentUser: Candidate;
-    makeDecision: (isSelected: boolean) => void;
+    currentCandidate: Candidate;
+    // makeDecision: (isSelected: boolean) => void;
 }
 
 const CandidateCard = ({
-    currentUser, 
-    makeDecision
+    currentCandidate, 
+    // makeDecision
 }: CandidateCardProps) => {
+    console.log(currentCandidate)
     return (
         <>
-            {currentUser?.name ? (
+            {currentCandidate?.id ? (
                 <section className='candidateCard'>
                     <figure>
-                        <img src={`${currentUser.avatar}`} alt={`${currentUser.username}`} />
+                        <img src={`${currentCandidate.avatar}`} alt={`${currentCandidate.username}`} />
                     </figure>
                     <article className='details'>
-                        <h2>{currentUser.name}</h2>
+                        <h2>{currentCandidate.name}</h2>
                         <p>
-                            <strong>Username</strong> {currentUser.username}
+                            <strong>Username</strong> {currentCandidate.username}
                         </p>
                         <p>
-                            <strong>Location</strong> {currentUser.location}
+                            <strong>Location</strong> {currentCandidate.location}
                         </p>
                         <p>
-                            <strong>Email</strong> {currentUser.email}
+                            <strong>Email</strong> {currentCandidate.email}
                         </p>
                         <p>
-                            <strong>{currentUser.html_url}</strong>
+                            <strong>{currentCandidate.html_url}</strong>
                         </p>
                         <p>
-                            <strong>Company</strong> {currentUser.company}
+                            <strong>Company</strong> {currentCandidate.company}
                         </p>
                     </article>
                 </section>
             ) : (
-                <h1 style={{ margin: '16px 0' }}>Please select a candidate.</h1>
+                <h1 style={{ margin: '16px 0' }}>Please select a candidate!</h1>
             )}
         </>
     );
