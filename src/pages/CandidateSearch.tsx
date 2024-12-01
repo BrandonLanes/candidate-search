@@ -18,7 +18,7 @@ const CandidateSearch = () => {
     company: null,
   });
 
-  // const [currentidx, _setCurrentidx] = useState<number>(0);
+  const [currentidx, setCurrentidx] = useState<number>(0);
   // const [searchInput, setSearchInput] = useState<string>('');
 
   // const addToSavedCandidates = () => {
@@ -29,11 +29,11 @@ const CandidateSearch = () => {
   // const searchForCandidateByName = async (event: FormEvent, candidate_name: string) => {
   //   event.preventDefault();
   // const searchForCandidateByName = async (event: FormEvent, candidate_name: string) => {
-  // const searchForCandidateByName = async (user: string) => {
-  //   const data: Candidate = await searchGithubUser(user);
-  //   setCurrentCandidate(data)
+  const searchForCandidateByName = async (user: string) => {
+    const data: Candidate = await searchGithubUser(user);
+    setCurrentCandidate(data)
     
-  // };
+  };
   const searchForRandomCandidate = async () => {
     // const results = await searchGithub();
     const data: Candidate[] = await searchGithub();
@@ -60,25 +60,29 @@ const CandidateSearch = () => {
   console.log('Here is Github data');
   // console.log(searchForRandomCandidate());
 
-  // // const makeDecision = async (isSelected:boolean) => {
-  // //   if (isSelected) {
-  // //     let displayCandidates: Candidate[] = []
+  const makeDecision = async () => {
+    // if (isSelected) {
+      let displayCandidates: Candidate[] = []
 
-  //     const savedCandidates = localStorage.getItem('savedCandidates')
-  //     if (typeof savedCandidates === 'string') {
-  //       displayCandidates = JSON.parse(savedCandidates)
-  //     }
-  //     displayCandidates.push(currentCandidate)
-  //     localStorage.setItem('savedCandidates', JSON.stringify(displayCandidates))
-  //   }
-  //   if (currentidx + 1 < results.length) {
-  //     setCurrentidx(currentidx + 1)
-  //     await searchForCandidateByName(results[currentidx + 1].username || '')
-  //   } else {
-  //     setCurrentidx(0)
-  //     await searchForCandidateByName(results[0].username || '')
-  //   }
-  // }
+      const savedCandidates = localStorage.getItem('savedCandidates')
+      if (typeof savedCandidates === 'string') {
+        displayCandidates = JSON.parse(savedCandidates)
+      }
+      displayCandidates.push(currentCandidate)
+      localStorage.setItem('savedCandidates', JSON.stringify(displayCandidates))
+    // }
+    if (currentidx + 1 < results.length) {
+      setCurrentidx(currentidx + 1)
+      await searchForCandidateByName(results[currentidx + 1].login || '')
+    } else {
+      setCurrentidx(0)
+      await searchForCandidateByName(results[0].login || '')
+    }
+  }
+  const denyDecision = async () => {
+    setCurrentidx(currentidx + 1)
+    await searchForCandidateByName(results[currentidx].login || '')
+  }
 
   useEffect(() => {
     searchForRandomCandidate()
@@ -96,7 +100,8 @@ const CandidateSearch = () => {
           <h1>Candidate Search</h1>
           <CandidateCard
             currentCandidate={currentCandidate}
-            // makeDecision={makeDecision} 
+            makeDecision={makeDecision} 
+            denyDecision={denyDecision}
             />
             {/* // addToSavedCandidates={addToSavedCandidates} */}
         {/* </form> */}

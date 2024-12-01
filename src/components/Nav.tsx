@@ -6,13 +6,10 @@ const Nav = () => {
     <nav>
       <ul>
         <li>
-          <Link to="./pages/CandidateSearch">Candidate Search</Link>
+          <Link to="/">Candidate Search</Link>
         </li>
         <li>
-          <Link to="./pages/ErrorPage">Error Page</Link>
-        </li>
-        <li>
-          <Link to="./pages/SavedCandidates">Saved Candidates</Link>
+          <Link to="/SavedCandidates">Saved Candidates</Link>
         </li>
       </ul>
     </nav>

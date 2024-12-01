@@ -1,14 +1,17 @@
+// import { FcMakeDecision } from 'react-icons/fc';
 import type { Candidate } from '../interfaces/Candidate.interface';
 // import { IoAddCircle, IoRemoveCircle } from 'react-icons/io5';
 
 type CandidateCardProps = {
     currentCandidate: Candidate;
-    // makeDecision: (isSelected: boolean) => void;
+    makeDecision: () => void;
+    denyDecision: () => void;
 }
 
 const CandidateCard = ({
     currentCandidate, 
-    // makeDecision
+    makeDecision,
+    denyDecision,
 }: CandidateCardProps) => {
     console.log(currentCandidate)
     return (
@@ -36,6 +39,8 @@ const CandidateCard = ({
                             <strong>Company</strong> {currentCandidate.company}
                         </p>
                     </article>
+                    <button onClick={makeDecision}>+</button>
+                    <button onClick={denyDecision}>-</button>
                 </section>
             ) : (
                 <h1 style={{ margin: '16px 0' }}>Please select a candidate!</h1>
