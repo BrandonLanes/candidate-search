@@ -1,9 +1,5 @@
 # Candidate Search
 
-## Description
-
-Candidate Search is a web application designed for employers to identify and shortlist potential candidates using the GitHub API. The project combines TypeScript, React, and local storage to deliver a seamless user experience. The application retrieves candidate information, allows employers to save or skip candidates, and provides a list of saved candidates for review.
-
 ## Table of Contents
 - [Description](#description)
 - [Features](#features)
@@ -12,6 +8,10 @@ Candidate Search is a web application designed for employers to identify and sho
 - [Technologies Used](#technologies-used)
 - [Contribution](#contribution)
 - [License](#license)
+
+## Description
+
+Candidate Search is a web application designed for employers to identify and shortlist potential candidates using the GitHub API. The project combines TypeScript, React, and local storage to deliver a seamless user experience. The application retrieves candidate information, allows employers to save or skip candidates, and provides a list of saved candidates for review.
 
 ## Features
 - Fetches and displays candidate data from the GitHub API.
